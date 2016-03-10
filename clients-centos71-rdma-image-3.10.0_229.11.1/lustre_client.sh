@@ -112,23 +112,13 @@ install_lustre_centos71()
 	# This code will be used to create the RPM for the currently running kernel
 	wget --tries 10 --waitretry 15 https://downloads.hpdd.intel.com/public/lustre/lustre-2.7.0/el7/client/SRPMS/lustre-client-2.7.0-3.10.0_123.20.1.el7.x86_64.src.rpm
 	
-	# Download current kernel-devel package from CentOS vault
-	wget --tries 10 --retry-connrefused --waitretry 15 http://vault.centos.org/7.1.1503/updates/x86_64/Packages/kernel-devel-3.10.0-229.11.1.el7.x86_64.rpm
-	if [ ! -f kernel-devel-3.10.0-229.11.1.el7.x86_64.rpm ]; then
-		# Try /os/
-		wget --tries 10 --retry-connrefused --waitretry 15 http://vault.centos.org/7.1.1503/updates/x86_64/Packages/kernel-devel-3.10.0-229.11.1.el7.x86_64.rpm
-	fi
-	
-	# Install the downloaded kernel-devel package that is needed to recompile the Lustre client modules
-	yum --nogpgcheck localinstall -y kernel-devel-3.10.0-229.11.1.el7.x86_64.rpm
-	
 	# Install the other packages necessary to recompile the Lustre client
 	# Documentation is here https://wiki.hpdd.intel.com/display/PUB/Rebuilding+the+Lustre-client+rpms+for+a+new+kernel
 	yum install -y rpm-build make libtool libselinux-devel
 	
 	# Rebuild the downloaded Lustre client RPM for the currently running kernel
-	rpmbuild --define "_topdir /root/rpmbuild" --rebuild --without servers lustre-client-2.7.0-3.10.0_123.20.1.el7.x86_64.src.rpm
-	
+	rpmbuild --define "_topdir /root/rpmbuild" --define 'kdir /root/linux-3.10.0-229.el7' --rebuild --without servers lustre-client-2.7.0-3.10.0_123.20.1.el7.x86_64.src.rpm
+
 	# Install the compiled RPM whose file names are based on the currently running kernel but with - replaced by _ (e.g. )
 	cd /root/rpmbuild/RPMS/x86_64/
 	yum --nogpgcheck localinstall -y lustre-client-2.7.0-3.10.0.x86_64.rpm lustre-client-modules-2.7.0-3.10.0.x86_64.rpm
