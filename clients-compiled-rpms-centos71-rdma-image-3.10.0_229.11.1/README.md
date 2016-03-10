@@ -1,4 +1,4 @@
-# Intel Lustre 2.7 clients on CentOS 7.1 (kernel 3.10.0_229.11.1.el7.x86_64) custom/user image with RDMA drivers
+# Intel Lustre 2.7 clients on CentOS 7.1 (kernel 3.10.0_229.11.1.el7.x86_64) custom/user image with RDMA drivers from PRE-COMPILED Lustre RPMS
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Farsenvlad%2Fazure-lustre%2Fmaster%2Fclients-centos71-rdma-image-3.10.0_229.11.1%2Fazuredeploy.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
@@ -8,6 +8,8 @@
 </a>
 
 This template creates 2 or more Intel Lustre 2.7 client virtual machines using custom/user image of CentOS 7.1 with RDMA drivers and mounts an existing Intel Lustre filesystem.
+
+Instead of compiling the Lustre modules, this template and custom script extension downloads pre-complied RPMS from this GitHub repo to speed up the process. The pre-compiled modules will only work properly on this specific CentOS 7.1 kernel 3.10.0_229.11.1.el7.x86_64. 
 
 * Custom/user image of CentOS 7.1 with RDMA drivers http://longliuswest.blob.core.windows.net/vhds/20150826185255-00853603622-centos71-rdma-os1.vhd
 * Create a storage account in your Azure Subscription that will be used to store the custom/user image and the OS disks of the Lustre client nodes
