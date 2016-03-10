@@ -109,8 +109,8 @@ install_lustre_centos71()
 	yum install -y wget dstat
 	
 	# Download pre-compiled RPMS
-	wget --tries 10 --waitretry 15 https://raw.githubusercontent.com/arsenvlad/azure-lustre/master/clients-compiled-rpms-centos71-rdma-image-3.10.0_229.11.1/rmps/lustre-client-2.7.0-3.10.0.x86_64.rpm
-	wget --tries 10 --waitretry 15 https://raw.githubusercontent.com/arsenvlad/azure-lustre/master/clients-compiled-rpms-centos71-rdma-image-3.10.0_229.11.1/rmps/lustre-client-modules-2.7.0-3.10.0.x86_64.rpm
+	wget --tries 10 --waitretry 15 https://raw.githubusercontent.com/arsenvlad/azure-lustre/master/clients-compiled-rpms-centos71-rdma-image-3.10.0_229.11.1/rpms/lustre-client-2.7.0-3.10.0.x86_64.rpm
+	wget --tries 10 --waitretry 15 https://raw.githubusercontent.com/arsenvlad/azure-lustre/master/clients-compiled-rpms-centos71-rdma-image-3.10.0_229.11.1/rpms/lustre-client-modules-2.7.0-3.10.0.x86_64.rpm
 	
 	# Install Lustre RPMs
 	yum --nogpgcheck localinstall -y lustre-client-2.7.0-3.10.0.x86_64.rpm lustre-client-modules-2.7.0-3.10.0.x86_64.rpm
